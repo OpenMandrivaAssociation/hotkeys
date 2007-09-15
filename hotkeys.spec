@@ -57,8 +57,8 @@ on the examples provided.
 
 Then, you can send them to the author, Anthony Wong <ypwong@ypwong.org>, 
 in order to have them included in the tarball. I will also take 
-contribution, send them to <misc@mandrake.org>, or fill a bugreport
-on qa.mandrakesoft.com ( i prefer bug report as i may forget mail ).
+contribution, send them to <misc@mandriva.org>, or fill a bugreport
+on qa.mandriva.com ( i prefer bug report as i may forget mail ).
 
 Keyboard for owner of Samsung X10
 ----------------------------------
