@@ -27,7 +27,6 @@ BuildRequires:  gtk2-devel
 BuildRequires:  gettext-devel
 BuildRequires:  libxkbfile-devel
 BuildRequires:  libxmu-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
 %description
 The HotKeys daemon listens for the "special" hotkeys that you won't
