@@ -1,6 +1,6 @@
 %define name	hotkeys
 %define version 0.5.7.1
-%define release %mkrel 11
+%define release %mkrel 13
 
 Summary:	A program to use the special keys on internet/multimedia keyboards
 Name:		%{name}
