@@ -1,33 +1,30 @@
-%define name	hotkeys
-%define version 0.5.7.1
-%define release %mkrel 13
-
 Summary:	A program to use the special keys on internet/multimedia keyboards
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:		hotkeys
+Version:	0.5.7.1
+Release:	%mkrel 14
 License:	GPL
 Group:		System/Kernel and hardware
-Url:		http://alioth.debian.org/projects/%{name}/
+URL:		http://alioth.debian.org/projects/%{name}/
 Source0:	%{url}%{name}_%{version}.tar.bz2
-Source1:        vaio.def.bz2
-Source2:        FCSAmilo.def.bz2
-Source3:        samsungx30.def.bz2
-Source4:        precision.def.bz2
-Source5:        dellinspiron.def.bz2
-Source6:        samsungx10.def.bz2
-Source10:       %{name}.sysconfig
-Source11:       %{name}.xinit
-Patch1:         hotkeys-0.5.7.1_mutefix.patch
-Patch2:         hotkeys-0.5.7.1-db4.patch
+Source1:	vaio.def.bz2
+Source2:	FCSAmilo.def.bz2
+Source3:	samsungx30.def.bz2
+Source4:	precision.def.bz2
+Source5:	dellinspiron.def.bz2
+Source6:	samsungx10.def.bz2
+Source10:	%{name}.sysconfig
+Source11:	%{name}.xinit
+Patch1:		hotkeys-0.5.7.1_mutefix.patch
+Patch2:		hotkeys-0.5.7.1-db4.patch
+Patch3:		hotkeys-0.5.7.1-gcc43.diff
 BuildRequires:	db4-devel >= 4.2.0
 BuildRequires:	libxml2-devel >= 2.2.8
 BuildRequires:	libxosd-devel
-BuildRequires:  gtk2-devel
-BuildRequires:  gettext-devel
-BuildRequires:  libxkbfile-devel
-BuildRequires:  libxmu-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
+BuildRequires:	gtk2-devel
+BuildRequires:	gettext-devel
+BuildRequires:	libxkbfile-devel
+BuildRequires:	libxmu-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 The HotKeys daemon listens for the "special" hotkeys that you won't
@@ -39,11 +36,15 @@ keycode configuration file format, which makes it possible to define the
 hotkeys to launch any programs you want.
 
 %prep
+
 %setup -q
 %patch1 -p0
 %patch2 -p1
+%patch3 -p0
 
 %build
+rm -f configure
+libtoolize --copy --force
 aclocal
 autoconf
 %configure --with-xosd
@@ -78,27 +79,28 @@ echo "WebBrowser=www-browser">> src/%{name}.conf
 echo "Shell=xvt">> src/%{name}.conf
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
+
 %makeinstall
 
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig
-install -m 644 src/%{name}.conf $RPM_BUILD_ROOT/%{_sysconfdir}
-install -m 644 %{SOURCE10} $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/%{name}
+install -d %{buildroot}%{_sysconfdir}/sysconfig
+install -m 644 src/%{name}.conf %{buildroot}/%{_sysconfdir}
+install -m 644 %{SOURCE10} %{buildroot}%{_sysconfdir}/sysconfig/%{name}
 
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/X11/xinit.d/
-install -m 755 %{SOURCE11} $RPM_BUILD_ROOT%{_sysconfdir}/X11/xinit.d/%{name}
+install -d %{buildroot}%{_sysconfdir}/X11/xinit.d/
+install -m 755 %{SOURCE11} %{buildroot}%{_sysconfdir}/X11/xinit.d/%{name}
 
-bzcat %{SOURCE1} > $RPM_BUILD_ROOT/%{_datadir}/%{name}/vaio.def
-bzcat %{SOURCE2} > $RPM_BUILD_ROOT/%{_datadir}/%{name}/FCSAmilo.def
-bzcat %{SOURCE3} > $RPM_BUILD_ROOT/%{_datadir}/%{name}/samsungx30.def
-bzcat %{SOURCE4} > $RPM_BUILD_ROOT/%{_datadir}/%{name}/precision.def
-bzcat %{SOURCE5} > $RPM_BUILD_ROOT/%{_datadir}/%{name}/dellinspiron.def
-bzcat %{SOURCE6} > $RPM_BUILD_ROOT/%{_datadir}/%{name}/samsungX10.def
+bzcat %{SOURCE1} > %{buildroot}/%{_datadir}/%{name}/vaio.def
+bzcat %{SOURCE2} > %{buildroot}/%{_datadir}/%{name}/FCSAmilo.def
+bzcat %{SOURCE3} > %{buildroot}/%{_datadir}/%{name}/samsungx30.def
+bzcat %{SOURCE4} > %{buildroot}/%{_datadir}/%{name}/precision.def
+bzcat %{SOURCE5} > %{buildroot}/%{_datadir}/%{name}/dellinspiron.def
+bzcat %{SOURCE6} > %{buildroot}/%{_datadir}/%{name}/samsungX10.def
 
 chmod 644 AUTHORS BUGS COPYING INSTALL TODO def/sample.xml
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-, root, root)
@@ -109,5 +111,3 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/%{name}.conf
 %config(noreplace) %{_sysconfdir}/sysconfig/%{name}
 %{_sysconfdir}/X11/xinit.d/%{name}
-
-
