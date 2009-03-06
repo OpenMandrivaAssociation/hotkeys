@@ -1,7 +1,7 @@
 Summary:	A program to use the special keys on internet/multimedia keyboards
 Name:		hotkeys
 Version:	0.5.7.1
-Release:	%mkrel 14
+Release:	%mkrel 15
 License:	GPL
 Group:		System/Kernel and hardware
 URL:		http://alioth.debian.org/projects/%{name}/
