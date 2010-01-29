@@ -17,6 +17,7 @@ Source11:	%{name}.xinit
 Patch1:		hotkeys-0.5.7.1_mutefix.patch
 Patch2:		hotkeys-0.5.7.1-db4.patch
 Patch3:		hotkeys-0.5.7.1-gcc43.diff
+Patch4:		hotkeys-0.5.7.1-includedir.patch
 BuildRequires:	db4-devel >= 4.2.0
 BuildRequires:	libxml2-devel >= 2.2.8
 BuildRequires:	libxosd-devel
@@ -36,19 +37,17 @@ keycode configuration file format, which makes it possible to define the
 hotkeys to launch any programs you want.
 
 %prep
-
 %setup -q
 %patch1 -p0
 %patch2 -p1
 %patch3 -p0
+%patch4 -p0
 
 %build
-rm -f configure
-libtoolize --copy --force
-aclocal
-autoconf
-%configure --with-xosd
-make CC="gcc -I%{_includedir}/libxml2 -I%{_includedir}/libxml2/libxml"
+autoreconf -fi
+%configure2_5x --with-xosd
+%make
+# CC="gcc -I%{_includedir}/libxml2 -I%{_includedir}/libxml2/libxml"
 cat > README.mdk <<EOF
 Adding a new keyboard
 ----------------------
@@ -81,7 +80,7 @@ echo "Shell=xvt">> src/%{name}.conf
 %install
 rm -rf %{buildroot}
 
-%makeinstall
+%makeinstall_std
 
 install -d %{buildroot}%{_sysconfdir}/sysconfig
 install -m 644 src/%{name}.conf %{buildroot}/%{_sysconfdir}
