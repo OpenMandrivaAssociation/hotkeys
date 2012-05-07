@@ -1,7 +1,7 @@
 Summary:	A program to use the special keys on internet/multimedia keyboards
 Name:		hotkeys
 Version:	0.5.7.1
-Release:	%mkrel 18
+Release:	20
 License:	GPL
 Group:		System/Kernel and hardware
 URL:		http://alioth.debian.org/projects/%{name}/
@@ -18,7 +18,7 @@ Patch1:		hotkeys-0.5.7.1_mutefix.patch
 Patch2:		hotkeys-0.5.7.1-db4.patch
 Patch3:		hotkeys-0.5.7.1-gcc43.diff
 Patch4:		hotkeys-0.5.7.1-includedir.patch
-BuildRequires:	db4-devel >= 4.2.0
+BuildRequires:	db-devel >= 4.2.0
 BuildRequires:	libxml2-devel >= 2.2.8
 BuildRequires:	libxosd-devel
 BuildRequires:	gtk2-devel
