@@ -15,7 +15,7 @@ Source6:	samsungx10.def.bz2
 Source10:	%{name}.sysconfig
 Source11:	%{name}.xinit
 Patch1:		hotkeys-0.5.7.1_mutefix.patch
-Patch2:		hotkeys-0.5.7.1-db4.patch
+Patch2:		hotkeys-0.5.7.1-db5.patch
 Patch3:		hotkeys-0.5.7.1-gcc43.diff
 Patch4:		hotkeys-0.5.7.1-includedir.patch
 BuildRequires:	db-devel >= 4.2.0
