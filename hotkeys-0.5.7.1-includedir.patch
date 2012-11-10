@@ -1,0 +1,24 @@
+--- src/Makefile.am.orig	2010-01-29 08:46:05.000000000 +0100
++++ src/Makefile.am	2010-01-29 08:47:24.000000000 +0100
+@@ -6,7 +6,7 @@
+ sysconf_DATA    = hotkeys.conf
+ man_MANS        = hotkeys.1
+ 
+-CFLAGS      = @CFLAGS@ @X_CFLAGS@ @XML_CFLAGS@ @LIBXOSD_CFLAGS@ @GTK_CFLAGS@ -I.. # -DDEBUG 
++CFLAGS      = @CFLAGS@ @X_CFLAGS@ @XML_CPPFLAGS@ @LIBXOSD_CFLAGS@ @GTK_CFLAGS@ -I.. # -DDEBUG 
+ LIBS        = @LIBS@ @X_LIBS@ @XML_LIBS@ @LIBXOSD_LIBS@ @GTK_LIBS@
+ DEFS        = @DEFS@ -DSHAREDIR=\"@datadir@/@PACKAGE@\" \
+               -DCONFDIR=\"@sysconfdir@\" -DCONFIG_NAME=\"@PACKAGE@.conf\"
+--- src/kbddef.c.include	2010-01-29 08:49:56.000000000 +0100
++++ src/kbddef.c	2010-01-29 08:50:09.000000000 +0100
+@@ -37,8 +37,8 @@
+  */
+ #include "XF86keysym.h"
+ 
+-#include <xmlmemory.h>
+-#include <parser.h>
++#include <libxml/xmlmemory.h>
++#include <libxml/parser.h>
+ 
+ #include "hotkeys.h"
+ #include "kbddef.h"

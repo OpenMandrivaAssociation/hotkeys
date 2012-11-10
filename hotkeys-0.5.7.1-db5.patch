@@ -1,0 +1,210 @@
+--- hotkeys-0.5.7.1/acinclude.m4	2002-11-25 18:27:13.000000000 +0000
++++ hotkeys-0.5.7.1.new/acinclude.m4	2006-12-31 00:26:38.000000000 +0000
+@@ -12,7 +12,7 @@
+ 
+ # serial 5
+ 
+-AC_DEFUN(AM_GTK_WITH_NLS,
++AC_DEFUN([AM_GTK_WITH_NLS],
+   [AC_MSG_CHECKING([whether NLS is requested])
+     dnl Default is enabled NLS
+     AC_ARG_ENABLE(nls,
+@@ -214,7 +214,7 @@
+     AC_SUBST(POSUB)
+   ])
+ 
+-AC_DEFUN(AM_GTK_GNU_GETTEXT,
++AC_DEFUN([AM_GTK_GNU_GETTEXT],
+   [AC_REQUIRE([AC_PROG_MAKE_SET])dnl
+    AC_REQUIRE([AC_PROG_CC])dnl
+    AC_REQUIRE([AC_PROG_RANLIB])dnl
+@@ -239,7 +239,7 @@
+      AC_DEFINE(HAVE_STPCPY)
+    fi
+ 
+-   AM_LC_MESSAGES
++#   AM_LC_MESSAGES
+    AM_GTK_WITH_NLS
+ 
+    if test "x$CATOBJEXT" != "x"; then
+@@ -337,29 +337,29 @@
+ 
+ 
+ dnl-----------------------------------------------------------------------
+-dnl Checks for LIBDB3
++dnl Checks for LIBDB5
+ dnl-----------------------------------------------------------------------
+-AC_DEFUN(AM_CHECK_DB3,
++AC_DEFUN([AM_CHECK_DB5],
+ [
+-    if test ! x$db3_libdir = x; then
+-        LIBS="$LIBS -L$db3_libdir"
++    if test ! x$db5_libdir = x; then
++        LIBS="$LIBS -L$db5_libdir"
+     fi
+-    if test ! x$db3_incdir = x; then
+-        CPPFLAGS="$CPPFLAGS -I$db3_incdir"
++    if test ! x$db5_incdir = x; then
++        CPPFLAGS="$CPPFLAGS -I$db5_incdir"
+     fi
+ 
+     dnl
+-    dnl We need to check both libdb and libdb3
++    dnl We need to check both libdb and libdb5
+     dnl
+-    AC_CHECK_LIB(db3, db_create, , [ nodb=yes ])
++    AC_CHECK_LIB(db5, db_create, , [ nodb=yes ])
+     if test "x$nodb" = "xyes"
+     then
+         AC_CHECK_LIB(db, db_create, ,
+           [ AC_MSG_RESULT(no)
+             echo "*** Cannot find a suitable Berkeley DB library on your system."
+-            echo "*** Version 3.2.9 or above is required."
++            echo "*** Version 5.3.0 or above is required."
+             echo "*** If you've installed it in an unusual location, please"
+-            echo "*** use --with-db3-inc and --with-db3-lib to specify it."
++            echo "*** use --with-db5-inc and --with-db5-lib to specify it."
+             exit 1
+           ])
+     fi
+@@ -367,24 +367,24 @@
+     dnl
+     dnl Check its version
+     dnl
+-    AC_MSG_CHECKING(for version of db3)
++    AC_MSG_CHECKING(for version of db5)
+     AC_TRY_RUN([
+     #include <db.h>
+     int main ()
+     {
+         int major=0, minor=0, patch=0;
+         db_version(&major, &minor, &patch);
+-        if ( major==3 && ((minor==2 && patch>=9) || minor>2) )
++        if ( major==5 && (minor>=3 && patch>=0) )
+             exit(0);
+         else
+             exit(1);
+     }
+-    ],[ AC_MSG_RESULT([>= 3.2.9, ok]) ],
+-      [ AC_MSG_RESULT([< 3.2.9, failed])
++    ],[ AC_MSG_RESULT([>= 5.3.0, ok]) ],
++      [ AC_MSG_RESULT([< 5.3.0, failed])
+         echo "*** The version of the Berkeley DB library installed is not"
+-        echo "*** 3.2.9 or above, make sure the correct version is installed."
++        echo "*** 5.3.0 or above, make sure the correct version is installed."
+         echo "*** If you've installed it in an unusual location, please"
+-        echo "*** use --with-db3-inc and --with-db3-lib to specify it."
++        echo "*** use --with-db5-inc and --with-db5-lib to specify it."
+         exit 1
+       ],
+       [echo $ac_n "cross compiling; assumed OK... $ac_c"]
+@@ -394,7 +394,7 @@
+ dnl-----------------------------------------------------------------------
+ dnl Checks for LIBXML2
+ dnl-----------------------------------------------------------------------
+-AC_DEFUN(AM_CHECK_LIBXML2,
++AC_DEFUN([AM_CHECK_LIBXML2],
+ [
+     if test x$xml_config_prefix != x
+     then
+@@ -458,7 +458,7 @@
+ dnl-----------------------------------------------------------------------
+ dnl Checks for LIBXOSD (>= 0.7.0)
+ dnl-----------------------------------------------------------------------
+-AC_DEFUN(AM_CHECK_LIBXOSD,
++AC_DEFUN([AM_CHECK_LIBXOSD],
+ [
+     if test ! x$xosd_libdir = x; then
+         LIBS="$LIBS -L$xosd_libdir"
+--- hotkeys-0.5.7.1/configure.in	2002-12-08 14:34:12.000000000 +0000
++++ hotkeys-0.5.7.1.new/configure.in	2006-12-31 00:24:52.000000000 +0000
+@@ -22,20 +22,20 @@
+                              [Do not try to compile and run a test XML program]),
+               , enable_xmltest=yes)
+ 
+-AC_ARG_WITH(db3-inc,
+-            AC_HELP_STRING([--with-db3-inc=DIR],
+-                           [Set the include directory of Berkeley DB3]),
+-            db3_incdir="$withval", db3_incdir="")
++AC_ARG_WITH(db5-inc,
++            AC_HELP_STRING([--with-db5-inc=DIR],
++                           [Set the include directory of Berkeley DB5]),
++            db4_incdir="$withval", db5_incdir="")
+  
+-AC_ARG_WITH(db3-lib,
+-            AC_HELP_STRING([--with-db3-lib=DIR],
+-                           [Set the library directory of Berkeley DB3]),
+-            db3_libdir="$withval", db3_libdir="")
+-
+-AC_ARG_ENABLE(db3test,
+-              AC_HELP_STRING([--disable-db3test],
+-                             [Do not try to test for libdb3, assume it's present]),
+-              , enable_db3test=yes)
++AC_ARG_WITH(db5-lib,
++            AC_HELP_STRING([--with-db5-lib=DIR],
++                           [Set the library directory of Berkeley DB5]),
++            db5_libdir="$withval", db5_libdir="")
++
++AC_ARG_ENABLE(db4test,
++              AC_HELP_STRING([--disable-db4test],
++                             [Do not try to test for libdb4, assume it's present]),
++              , enable_db4test=yes)
+ 
+ AC_ARG_WITH(gtk,
+             AC_HELP_STRING([--with-gtk],
+@@ -98,10 +98,10 @@
+ dnl-----------------------------------------------------------------------
+ dnl Checks for DB3
+ dnl-----------------------------------------------------------------------
+-if test "x$enable_db3test" = "xyes"; then
+-    AM_CHECK_DB3
++if test "x$enable_db4test" = "xyes"; then
++    AM_CHECK_DB5
+ else
+-#    AC_MSG_NOTICE([Skipping libdb3 test])
++#    AC_MSG_NOTICE([Skipping libdb5 test])
+ echo
+ fi
+ 
+--- hotkeys-0.5.7.1/Makefile.in	2002-12-08 14:34:43.000000000 +0000
++++ hotkeys-0.5.7.1.new/Makefile.in	2006-12-30 18:06:42.000000000 +0000
+@@ -90,7 +90,7 @@
+ USE_NLS = @USE_NLS@
+ VERSION = @VERSION@
+ XML2_CONFIG = @XML2_CONFIG@
+-XML_CFLAGS = @XML_CFLAGS@
++XML_CFLAGS = @XML_CPPFLAGS@
+ XML_CONFIG = @XML_CONFIG@
+ XML_LIBS = @XML_LIBS@
+ l = @l@
+--- hotkeys-0.5.7.1/src/conf.c	2002-11-27 19:30:08.000000000 +0000
++++ hotkeys-0.5.7.1.new/src/conf.c	2006-12-30 18:10:30.000000000 +0000
+@@ -249,7 +249,7 @@
+         bailout();
+     }
+ 
+-    if ( (ret = dbp->open(dbp, NULL, NULL, DB_HASH, DB_CREATE, 0664)) != 0 )
++    if ( (ret = dbp->open(dbp, NULL, NULL, NULL, DB_HASH, DB_CREATE, 0664)) != 0 )
+     {
+         uError("Can't create hash table: %d", ret);
+         bailout();
+--- hotkeys-0.5.7.1/src/Makefile.in	2002-12-08 14:34:44.000000000 +0000
++++ hotkeys-0.5.7.1.new/src/Makefile.in	2006-12-30 18:12:40.000000000 +0000
+@@ -90,7 +90,7 @@
+ USE_NLS = @USE_NLS@
+ VERSION = @VERSION@
+ XML2_CONFIG = @XML2_CONFIG@
+-XML_CFLAGS = @XML_CFLAGS@
++XML_CFLAGS = @XML_CPPFLAGS@
+ XML_CONFIG = @XML_CONFIG@
+ XML_LIBS = @XML_LIBS@
+ l = @l@
+@@ -101,7 +101,7 @@
+ sysconf_DATA = hotkeys.conf
+ man_MANS = hotkeys.1
+ 
+-CFLAGS = @CFLAGS@ @X_CFLAGS@ @XML_CFLAGS@ @LIBXOSD_CFLAGS@ @GTK_CFLAGS@ -I.. # -DDEBUG 
++CFLAGS = @CFLAGS@ @X_CFLAGS@ @XML_CPPFLAGS@ @LIBXOSD_CFLAGS@ @GTK_CFLAGS@ -I.. # -DDEBUG 
+ LIBS = @LIBS@ @X_LIBS@ @XML_LIBS@ @LIBXOSD_LIBS@ @GTK_LIBS@
+ DEFS = @DEFS@ -DSHAREDIR=\"@datadir@/@PACKAGE@\"               -DCONFDIR=\"@sysconfdir@\" -DCONFIG_NAME=\"@PACKAGE@.conf\"
+ 

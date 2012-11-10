@@ -1,0 +1,10 @@
+--- src/hotkeys.c   2005-06-03 19:30:08.000000000 +0800
++++ src/hotkeys.c   2005-06-03 19:29:56.000000000 +0800
+@@ -829,7 +829,6 @@
+ #ifdef HAVE_LIBXOSD
+                     if (osd)
+                     {
+-                        xosd_set_timeout(osd, -1);
+                         xosd_display(osd, 0, XOSD_string, "Mute");
+                         xosd_display(osd, 1, XOSD_string, "");
+                     }

@@ -1,0 +1,10 @@
+--- src/hotkeys.c	2002-12-03 20:26:32.000000000 +0100
++++ src/hotkeys.c.oden	2008-07-31 11:58:10.000000000 +0200
+@@ -49,6 +49,7 @@
+ #include <sys/stat.h>
+ #include <sys/wait.h>
+ #include <sys/time.h>
++#include <limits.h>
+ 
+ /* Mixer related */
+ #include <fcntl.h>
