@@ -1,10 +1,8 @@
 sources:
-  "dellinspiron.def.bz2:"	4b1faeaf8cd921fd0337f0f40f3ffcc2f5fcc3ce
-  "FCSAmilo.def.bz2:"	04ead9a73cd231a941552648f6d269ac55999aa5
-  "hotkeys_0.5.7.1.tar.bz2:"	79021182683715b11e7b3c59e5e071a150210942
-  "hotkeys.sysconfig:"	753f43024bbfea00875c01c4e9ae8871590c2be0
-  "hotkeys.xinit:"	ea7f6787dd3d2f04430ec982412a058a1ed82390
-  "precision.def.bz2:"	ed6eca87bdf9675c6e4af588908f4f1bf61370f3
-  "samsungx10.def.bz2:"	b56f7315cf53a64dc015fe15202e13116a796644
-  "samsungx30.def.bz2:"	f7b26ce8d0f8e8d06d495e8d15843bf007b563dc
-  "vaio.def.bz2:"	c4d1b8ec70d3eed232c8c88634849031202dc6fd
+  "FCSAmilo.def.bz2": 04ead9a73cd231a941552648f6d269ac55999aa5
+  "dellinspiron.def.bz2": 4b1faeaf8cd921fd0337f0f40f3ffcc2f5fcc3ce
+  "hotkeys_0.5.7.1.tar.bz2": 79021182683715b11e7b3c59e5e071a150210942
+  "precision.def.bz2": ed6eca87bdf9675c6e4af588908f4f1bf61370f3
+  "samsungx10.def.bz2": b56f7315cf53a64dc015fe15202e13116a796644
+  "samsungx30.def.bz2": f7b26ce8d0f8e8d06d495e8d15843bf007b563dc
+  "vaio.def.bz2": c4d1b8ec70d3eed232c8c88634849031202dc6fd

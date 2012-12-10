@@ -1,0 +1,2 @@
+# automatic load of hotkeys at X11 startup
+AUTOMATIC_HOTKEYS=no

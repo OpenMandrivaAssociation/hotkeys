@@ -1,0 +1,5 @@
+#!/bin/sh
+. /etc/sysconfig/hotkeys
+if [ "$AUTOMATIC_HOTKEYS" = "yes" ]; then
+    hotkeys
+fi

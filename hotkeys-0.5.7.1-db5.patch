@@ -60,7 +60,7 @@
            [ AC_MSG_RESULT(no)
              echo "*** Cannot find a suitable Berkeley DB library on your system."
 -            echo "*** Version 3.2.9 or above is required."
-+            echo "*** Version 5.3.0 or above is required."
++            echo "*** Version 5.2.0 or above is required."
              echo "*** If you've installed it in an unusual location, please"
 -            echo "*** use --with-db3-inc and --with-db3-lib to specify it."
 +            echo "*** use --with-db5-inc and --with-db5-lib to specify it."
@@ -80,15 +80,15 @@
          int major=0, minor=0, patch=0;
          db_version(&major, &minor, &patch);
 -        if ( major==3 && ((minor==2 && patch>=9) || minor>2) )
-+        if ( major==5 && (minor>=3 && patch>=0) )
++        if ( major==5 && (minor>=2 && patch>=0) )
              exit(0);
          else
              exit(1);
      }
 -    ],[ AC_MSG_RESULT([>= 3.2.9, ok]) ],
 -      [ AC_MSG_RESULT([< 3.2.9, failed])
-+    ],[ AC_MSG_RESULT([>= 5.3.0, ok]) ],
-+      [ AC_MSG_RESULT([< 5.3.0, failed])
++    ],[ AC_MSG_RESULT([>= 5.2.0, ok]) ],
++      [ AC_MSG_RESULT([< 5.2.0, failed])
          echo "*** The version of the Berkeley DB library installed is not"
 -        echo "*** 3.2.9 or above, make sure the correct version is installed."
 +        echo "*** 5.3.0 or above, make sure the correct version is installed."

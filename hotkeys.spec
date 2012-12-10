@@ -18,14 +18,13 @@ Patch1:		hotkeys-0.5.7.1_mutefix.patch
 Patch2:		hotkeys-0.5.7.1-db5.patch
 Patch3:		hotkeys-0.5.7.1-gcc43.diff
 Patch4:		hotkeys-0.5.7.1-includedir.patch
-BuildRequires:	db-devel >= 4.2.0
-BuildRequires:	libxml2-devel >= 2.2.8
-BuildRequires:	libxosd-devel
-BuildRequires:	gtk2-devel
+BuildRequires:	db-devel >= 5.2.0
 BuildRequires:	gettext-devel
-BuildRequires:	libxkbfile-devel
-BuildRequires:	libxmu-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRequires:	libxosd-devel
+BuildRequires:	pkgconfig(gtk+-2.0)
+BuildRequires:	pkgconfig(libxml-2.0)
+BuildRequires:	pkgconfig(xkbfile)
+BuildRequires:	pkgconfig(xmu)
 
 %description
 The HotKeys daemon listens for the "special" hotkeys that you won't
@@ -78,8 +77,6 @@ echo "WebBrowser=www-browser">> src/%{name}.conf
 echo "Shell=xvt">> src/%{name}.conf
 
 %install
-rm -rf %{buildroot}
-
 %makeinstall_std
 
 install -d %{buildroot}%{_sysconfdir}/sysconfig
@@ -98,11 +95,7 @@ bzcat %{SOURCE6} > %{buildroot}/%{_datadir}/%{name}/samsungX10.def
 
 chmod 644 AUTHORS BUGS COPYING INSTALL TODO def/sample.xml
 
-%clean
-rm -rf %{buildroot}
-
 %files
-%defattr(-, root, root)
 %doc AUTHORS BUGS COPYING INSTALL TODO def/sample.xml README.mdk
 %{_bindir}/%{name}
 %{_datadir}/%{name}
@@ -110,3 +103,4 @@ rm -rf %{buildroot}
 %config(noreplace) %{_sysconfdir}/%{name}.conf
 %config(noreplace) %{_sysconfdir}/sysconfig/%{name}
 %{_sysconfdir}/X11/xinit.d/%{name}
+
