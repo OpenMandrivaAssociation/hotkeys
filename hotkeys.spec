@@ -4,7 +4,7 @@ Version:	0.5.7.1
 Release:	21
 License:	GPL
 Group:		System/Kernel and hardware
-URL:		http://alioth.debian.org/projects/%{name}/
+URL:		https://alioth.debian.org/projects/%{name}/
 Source0:	%{url}%{name}_%{version}.tar.bz2
 Source1:	vaio.def.bz2
 Source2:	FCSAmilo.def.bz2
