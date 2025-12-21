@@ -18,6 +18,11 @@ Patch1:		hotkeys-0.5.7.1_mutefix.patch
 Patch2:		hotkeys-0.5.7.1-db5.patch
 Patch3:		hotkeys-0.5.7.1-gcc43.diff
 Patch4:		hotkeys-0.5.7.1-includedir.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	db-devel >= 5.2.0
 BuildRequires:	gettext-devel
 BuildRequires:	libxosd-devel
